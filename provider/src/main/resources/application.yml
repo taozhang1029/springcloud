@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8888
 
 eureka:
   client:
@@ -21,7 +21,7 @@ spring:
     username: root
     password: taozhang1029
   application:
-    name: user-provider
+    name: service-provider
 
 mybatis:
   type-aliases-package: com.kingsley.pojo

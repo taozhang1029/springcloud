@@ -8,16 +8,16 @@ eureka:
     # 写死自己的ip地址
     prefer-ip-address: true
     ip-address: 127.0.0.1
-  user-provider:
+  service-provider:
     ribbon:
       NFLoadBalancerRuleClassName: com.kingsley.consumer.loadbalancer.MyLoadBalanceRule
 
 server:
-  port: 80
+  port: 8080
 
 spring:
   application:
-    name: user-consumer
+    name: service-consumer
 
 # 设置全局超时时长
 hystrix:

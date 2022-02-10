@@ -31,7 +31,7 @@ public class ConsumerController {
     @GetMapping("{id}")
     public User queryById(@PathVariable("id") Long id) {
         // 根据服务id获取服务
-        List<ServiceInstance> userServices = discoveryClient.getInstances("user-service");
+        List<ServiceInstance> userServices = discoveryClient.getInstances("service-provider");
         System.out.println(userServices);
         String url = userServices.get(0).getUri().toString() + "/user/" + id;
         System.out.println(url);
@@ -41,7 +41,7 @@ public class ConsumerController {
     /*
     @GetMapping("{id}")
     public User queryById(@PathVariable("id") Long id) {
-        String url = "http://user-service/user/" + id;
+        String url = "http://service-provider/user/" + id;
         return restTemplate.getForObject(url,User.class);
     }*/
     
@@ -59,7 +59,7 @@ public class ConsumerController {
         if (id == 2) {
             throw new RuntimeException();
         }
-        String url = "http://user-provider/user/" + id;
+        String url = "http://service-provider/user/" + id;
         return restTemplate.getForObject(url, String.class);
     }
 

@@ -1,0 +1,11 @@
+server:
+  port: 80
+spring:
+  application:
+    name: springcloud-zuul
+zuul:
+  routes:
+    # 名称通常与服务名相同，但不是必须的，即此处不是必须为service-provider
+    service-provider:
+      path: /service-provider/**
+      url: http://localhost:8888

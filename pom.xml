@@ -12,6 +12,7 @@
         <module>consumer</module>
         <module>eureka-server</module>
         <module>common</module>
+        <module>zuul</module>
     </modules>
     <!-- 采用聚合工程的方式方便测试工程间的调用，聚合工程中父工程要打包成pom格式 -->
     <packaging>pom</packaging>
