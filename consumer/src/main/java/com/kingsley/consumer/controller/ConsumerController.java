@@ -3,6 +3,7 @@ package com.kingsley.consumer.controller;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
  * @IDE : IntelliJ IDEA
  */
 @RestController
-@RequestMapping("/consumer")
+@RequestMapping("/consumer/user")
 @DefaultProperties(defaultFallback = "defaultFallback") // 设置全局（Controller界别）服务降级方法
 public class ConsumerController {
     
