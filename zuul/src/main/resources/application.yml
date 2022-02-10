@@ -3,9 +3,39 @@ server:
 spring:
   application:
     name: springcloud-zuul
+
+# zuul的配置有4种形式
+# 1. 不配置，这种情况下zuul路由默认为服务id
+
+# 2. 不引入eureka的情况下，配置path和url属性
+#zuul:
+#  routes:
+#  # 名称(key)通常与服务名相同，但不是必须的，即不是必须为service-provider,例如使用service-provider1
+#    service-provider1:
+#      path: /provider/**
+#      url: http://localhost:8888
+#  prefix: /api
+
+# 3. 引入eureka后可使用服务id，而不需要url属性
+#zuul:
+#  routes:
+#    # 名称(key)通常与服务名相同，但不是必须的，即不是必须为service-provider,例如使用service-provider1
+#    service-provider1:
+#      path: /provider/**
+#      serviceId: service-provider
+#  prefix: /api
+
+# 4. 方式3的简略写法，此处的key必须为id，即没有设置url和serviceId属性的情况下，key必须与服务id相同
 zuul:
   routes:
-    # 名称通常与服务名相同，但不是必须的，即此处不是必须为service-provider
-    service-provider:
-      path: /service-provider/**
-      url: http://localhost:8888
+    service-provider: /provider/**
+  # 路由前缀
+  prefix: /api
+
+# 上述4种方式，使用key或者path均可访问到服务
+
+# 将zuul注册到注册中心，使得zuul可以拉取服务列表
+eureka:
+  client:
+    service-url:
+      defaultZone: http://www.kingsley.com:10086/eureka
