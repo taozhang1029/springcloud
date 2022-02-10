@@ -1,15 +1,16 @@
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:10000/eureka
+      defaultZone: http://127.0.0.1:10000/eureka,http://127.0.0.1:10086/eureka
+    # 拉取服务列表的时间间隔
+    registry-fetch-interval-seconds: 10
   instance:
-    # 发送心跳的间隔
-    lease-renewal-interval-in-seconds: 30
-    # 超过此时间若Eureka没收到心跳则认为该服务已挂
-    lease-expiration-duration-in-seconds: 90
     # 写死自己的ip地址
     prefer-ip-address: true
     ip-address: 127.0.0.1
+  user-provider:
+    ribbon:
+      NFLoadBalancerRuleClassName: com.kingsley.consumer.loadbalancer.MyLoadBalanceRule
 
 server:
   port: 80
@@ -18,10 +19,16 @@ spring:
   application:
     name: user-consumer
 
+# 设置全局超时时长
 hystrix:
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 2500
+            timeoutInMilliseconds: 2000
+
+feign:
+  hystrix:
+    # 开启feign的熔断
+    enabled: true
