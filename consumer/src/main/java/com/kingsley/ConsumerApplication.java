@@ -17,9 +17,9 @@ import org.springframework.web.client.RestTemplate;
 
 // @SpringBootApplication
 // @EnableDiscoveryClient
-// @EnableCircuitBreaker
+// @EnableCircuitBreaker // 开启熔断组件
 
-@SpringCloudApplication
+@SpringCloudApplication // 组合注解
 public class ConsumerApplication {
 
     @Bean

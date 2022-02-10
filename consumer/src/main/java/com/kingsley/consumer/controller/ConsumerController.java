@@ -1,9 +1,7 @@
 package com.kingsley.consumer.controller;
 
-import com.kingsley.pojo.User;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,9 +19,9 @@ import org.springframework.web.client.RestTemplate;
  */
 @RestController
 @RequestMapping("/consumer")
-@DefaultProperties(defaultFallback = "defaultFallback")
+@DefaultProperties(defaultFallback = "defaultFallback") // 设置全局（Controller界别）服务降级方法
 public class ConsumerController {
-
+    
     @Autowired
     private RestTemplate restTemplate;
 
@@ -45,28 +43,23 @@ public class ConsumerController {
         String url = "http://user-service/user/" + id;
         return restTemplate.getForObject(url,User.class);
     }*/
-
+    
     @GetMapping("{id}")
-    //@HystrixCommand(fallbackMethod = "queryByIdFallback")
+    // @HystrixCommand(fallbackMethod = "queryByIdFallback") // 服务降级时执行的方法
+    @HystrixCommand // 不指定熔断方法，则会使用全局的服务降级方法
     // 局部自定义超时时长，全局需要在application.yml文件中配置
     /*@HystrixCommand(commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "2500")})*/
-    public User queryById(@PathVariable("id") Long id) {
-
-        try {
-            Thread.sleep(2000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "2500")
+            })*/
+    public String queryById(@PathVariable("id") Long id) {
         String url = "http://user-provider/user/" + id;
-        return restTemplate.getForObject(url, User.class);
+        return restTemplate.getForObject(url, String.class);
     }
 
     /*public String queryByIdFallback(Long id) {
         return "抱歉，服务器正忙！";
     }*/
-
+    
     public String defaultFallback() {
         return "抱歉，服务器正忙！";
     }

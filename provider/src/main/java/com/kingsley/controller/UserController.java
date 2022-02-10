@@ -27,6 +27,12 @@ public class UserController {
     
     @RequestMapping("{id}")
     public User queryById(@PathVariable("id") Long id) {
+        // 模拟超时
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         User user = userService.queryById(id);
         log.info("queryById method ... {}", user);
         return user;
