@@ -51,7 +51,13 @@ public class ConsumerController {
     /*@HystrixCommand(commandProperties = {
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "2500")
             })*/
+    
     public String queryById(@PathVariable("id") Long id) {
+        // 测试服务熔断,服务降级是针对单次请求而言的，默认配置下：当请求次数达到20次，且请求失败（超时）占比超过50%则会触发服务熔断，
+        // 服务将处于半可用状态——5s内所有请求降级，5秒后部分请求通过，
+        if (id == 2) {
+            throw new RuntimeException();
+        }
         String url = "http://user-provider/user/" + id;
         return restTemplate.getForObject(url, String.class);
     }
