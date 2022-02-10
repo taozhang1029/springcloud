@@ -12,7 +12,7 @@ import java.util.List;
  * @author kingsley
  * @time 2022/2/10 13:06
  * @ide IntelliJ IDEA
- * @name com.kingsley.consumer.config.WebConfig
+ * @name com.kingsley.config.WebConfig
  * @desc web应用配置
  */
 @Configuration
