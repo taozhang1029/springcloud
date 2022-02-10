@@ -1,0 +1,5 @@
+# Project exclude paths
+/common/target/
+/consumer/target/
+/eureka-server/target/
+/provider/target/

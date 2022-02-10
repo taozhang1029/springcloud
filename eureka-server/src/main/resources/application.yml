@@ -1,0 +1,23 @@
+server:
+  port: 10000
+
+# 应用的名称，会显示在Eureka注册中心中
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10000/eureka
+    # 是否注册自己
+    register-with-eureka: false
+
+  # 失效剔除时长，默认60秒
+  server:
+    eviction-interval-timer-in-ms: 60000
+
+ # 写死自己的ip地址
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1

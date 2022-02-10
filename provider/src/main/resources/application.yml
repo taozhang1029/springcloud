@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10000/eureka
+  instance:
+    # 发送心跳的间隔
+    lease-renewal-interval-in-seconds: 30
+    # 超过此时间若Eureka没收到心跳则认为该服务已挂
+    lease-expiration-duration-in-seconds: 90
+    # 写死自己的ip地址
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/leyou?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true
+    username: root
+    password: taozhang1029
+  application:
+    name: user-provider
+
+mybatis:
+  type-aliases-package: com.kingsley.pojo
+
+logging:
+  level:
+    com.kingsley.*: info
